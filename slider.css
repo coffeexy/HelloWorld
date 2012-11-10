@@ -1,0 +1,31 @@
+li{
+	list-style: none;
+}
+.newspic{
+	position:relative;
+}
+.newspic a{
+	color:#333;
+	text-decoration: none; 
+}
+.jsNav{
+	position: absolute;
+	bottom: 8px;
+	left: 6px;
+	overflow: hidden;
+	padding-left: 4px;
+}
+.jsNav a {
+	font: 12px/20px Arial, Helvetica, sans-serif;
+	color: #000;
+	padding: 3px;
+}
+.newspic a.imgSelected {
+	font-weight: bold;
+	background: #ff5f6a;
+	border-radius: 5px;
+	color: #fff;
+}
+.newspic a:hover{
+	text-decoration: underline;
+}
