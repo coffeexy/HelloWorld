@@ -1,0 +1,154 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link type="text/css" rel="stylesheet" href="css/button.css">
+<link type="text/css" rel="stylesheet" href="css/reset.css">
+
+<script type="text/javascript" src="js/jquery.js"></script>
+<title>按钮</title>
+<style>
+	body{padding-left:10px;}
+	#searchForm{position:relative;width:30%;}
+</style>	
+<script>
+	$(document).ready(function() {
+		showButt();//手动选择快递按钮
+		tabClick();//标签搜索点击事件；
+		
+
+
+	});	
+	function showButt() {//手动选择快递按钮
+		var target = $('.moreButt');
+		$('.moreKD').click(function(){				
+				if(target.css('visibility') == 'visible')
+					target.css('visibility','hidden');
+				else target.css('visibility','visible');
+			});
+				
+		target.click(function(){			
+			target.css('visibility','hidden');
+			
+		});
+	}
+		function tabClick(){
+		$(".bTag").toggle(function(){
+				$(this).addClass('select');
+			},function(){
+				$(this).removeClass('select');
+		    }
+		);
+	}
+
+</script>
+</head>
+<body>
+<h1>按钮类</h1>
+<a class="butt" onclick="countAccept()"><span class="**">一般按钮</span></a>
+<!--<li ftype="butt" name="aa" label="" value="刷新" command="aa"></li>-->
+
+<a class="butt1" onclick="countAccept()"><span class="**">重要按钮（常用按钮）</span></a>
+<!--<li ftype="butt" btnclass=”butt1” name="refresh" label="" value="刷新" command="refresh"></li>-->
+
+<a class="butt1 disabled" onclick="countAccept()"><span class="**">不可用按钮</span></a>
+<br/><br/>
+
+<h2>链接按钮</h2>
+<span class="seLine">|</span><a class="linkButt" onclick="countAccept()"><span class="**">链接按钮</span></a>
+<a class="linkButt" onclick="countAccept()"><span class="**">链接按钮</span></a>
+
+<br/><br/>
+
+<h2>同类按钮</h2>
+<a id="1" onclick="" class="butt same"><span class="*">导入</span></a>	
+<a id="2" onclick="" class="butt same"><span class="*">新增</span></a>
+<a id="3" onclick="" class="butt same""><span class="editButt">修改</span> </a>		
+<a id="4" onclick="" class="butt sm""><span class="linkButt">删除</span> </a>
+
+<br/>
+<a id="1" class="butt1 same" onclick=""><span class="*">打印快递单</span></a>
+<a id="2" class="butt1 sm" onclick=""><span class="*">打印发货单</span></a>
+<br/>
+<ul class="blockButt">
+	<li ><a id="" class="butt"><span class="">手动选择快递</span><span class="moreKD">&nbsp;</span></a></li>
+	<li class="moreButt" style="top:25px;"><a id="btn_forwards" onclick="forwardsListWin();" class="butt"><span class="checkoutButt">批量选择快递</span> </a></li>
+	<li class="moreButt" style="top:50px;"><a id="btn_forwards" onclick="openCompareWin();" showid="btn_outstock_chiocebycompare" class="butt"><span class="compairButt">比价选择快递</span> </a></li>
+</ul>
+
+<br/><br/>
+<h2>input type="button"类型按钮</h2>
+<input type="button" value="预览" onclick="" />
+<input type="button" value="导入订单" id="" onclick="" />
+<input type="button" value="模板管理" id="" onclick=""  />
+
+<br/><br/>
+<h2>搜索按钮</h2>
+<div id="searchForm">
+    <ul class="dhtmlxForm" name="searchForm" oninit="doOnSearchFormInit">
+			<li ftype="input" name="clientName"></li>
+			<li ftype="newcolumn"></li>
+			<li ftype="butt" label="searchButt" value="&nbsp" name="search" command="search"></li>
+    </ul>
+</div>
+<a id="1" class="butt" onclick=""><span class="searchButt">&nbsp</span></a>
+<br/>
+<img src="img/search.jpg" />
+<p>效果图如上。注意点就是value="& nbsp"，没有“搜索”的文字</p>
+
+<br/><br/>
+<div id="searchForm">
+	<a class="searchMore" id="search">
+		<span class="search" onclick="doSearch()"></span>
+		<span class="more" id="toggleFormBtn"></span>
+	</a>
+</div>
+<p>效果图如下。具体看代码</p>
+<img src="img/searchMore.jpg" />
+
+<!--<div id="searchForm">
+	<a class="searchMore" id="search">
+		<span class="search" onclick="doSearch()"></span>
+		<span class="more" id="toggleFormBtn"></span>
+	</a>
+	<!-- 上面标签a整块为更多搜索的作用块.注意onclick="doSearch()"，具体页面，搜索的事件不同，需要绑定 -->
+	
+<!--  <ul class="dhtmlxForm" name="search_form" oninit="doOnFormInit">
+  	<li ftype="settings"></li>
+    <li ftype="block" style="float:right;">
+    	<ul>
+				<li ftype="combo" name="search_type"> </li>
+        <li ftype="newcolumn"></li>
+        <li ftype="input" name="search_value" inputWidth="180"></li>
+        <li ftype="newcolumn"></li>
+        <li ftype="butt" name="sale" label="searchButt" command="search" value="&nbsp"></li> 
+        <li ftype="newcolumn"></li>
+      </ul>
+     </li>
+     <li ftype="block">
+		   <ul>
+					<li ftype="calendar" name="search_date" labelWidth="65" inputWidth="130">账单月份：</li>
+       </ul>
+     </li>      
+  </ul>
+  <!-- 上面ul块为组建提供的combo，input，butt，select等类型。有且仅有两个<li ftype="block">，第二个用于隐藏，原来文档有说明。点击小三角的时候显示的内容 -->
+  
+  <!-- 下面块为标签a搜索style="display:none;" -->
+  <!--<div id="tabSearch" style="display:none;">
+	  <ul>
+			<li>
+				<a class="label">返点方式：</a>
+				<a class="bTag" n="returntype" v="1"><span class="">按营业额</span></a>
+				<a class="bTag" n="returntype" v="0"><span class="">按票件量</span></a>
+			</li>
+	  </ul>
+	  <!-- 下面块为 “筛选“ ”重置”按钮 -->
+	  <!--<div class="buttBlock fr">
+	     <a class="butt" id="reset" onclick="doReset()"><span class="resetButt">重置</span></a>
+	     <a class="butt1" id="search" onclick="doSearch()"><span class="search">筛选</span></a>
+	  </div>
+ 	</div>
+</div>-->
+
+</body>
+</html>

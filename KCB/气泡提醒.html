@@ -1,0 +1,32 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link type="text/css" rel="stylesheet" href="css/reset.css">
+<title>带三角的气泡提醒</title>
+<style>
+	.tipBox{border:1px solid #ccc; border-radius:5px;position:relative; background-color: #fff;margin-top: 10px;width: 200px;}
+  .a1,.a2{width:0; height:0; overflow:hidden; border-width:10px; border-style:dotted dotted solid;  position:absolute}
+  .abox{position: absolute; width:20px; height: 20px; left:20px; top:-20px}
+  .a1{border-color:transparent transparent #ccc;  top:-1px}
+  .a2{border-color:transparent transparent #FFFFFF;  top:0}
+  .tipBox p{padding: 10px;}
+</style>
+<script>	
+	$(document).ready(function() {
+		//事件
+	});	
+</script>
+</head>
+<body>
+	<h1>带三角的气泡提醒</h1>
+	<div class="tipBox">
+	    <div class="abox">
+	        <div class="a1"></div>
+	        <div class="a2"></div>
+	     </div>
+	     <p>发送内容不能为空，请重新输入。</p>
+	</div>
+	<p>说明：.a1,.a2为小三角箭头。可以自己修改位置和方向。</p>
+</body>
+</html>

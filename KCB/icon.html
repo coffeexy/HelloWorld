@@ -1,0 +1,56 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link type="text/css" rel="stylesheet" href="css/reset.css">
+<title>表格内小图标icon</title>
+<style>
+	.tableIcon{height:16px;width:16px;display:inline-block;margin-right:1px;background:url(img/icons.png) no-repeat left top;}
+	.yi{background-position:left top;}/*已打印 OR 已发货*/
+	.wei{background-position:left -16px;}/*未打印 OR 未审核*/
+	.zhu{background-position:left -32px;}/*主订单*/
+	.fu{background-position:left -48px;}/*副订单 */
+	.fan{background-position:left -64px;}/*反审核订单*/
+	.bai{background-position:left -80px;}/*同步失败*/
+	.yan{background-position:left -96px;}/*延长收货*/
+	
+</style>
+<script>	
+	$(document).ready(function() {
+		//事件
+	});	
+</script>
+</head>
+<body>
+	<h1>表格内小图标icon</h1>
+	<table valign="middle" align="center">
+		<tr>
+		  <td><span class="tableIcon yi"></span></td>
+		</tr>
+		<tr>
+		  <td><span class="tableIcon wei"></span></td>
+		</tr>
+		<tr>
+		  <td><span class="tableIcon yi"></span><span class="tableIcon zhu"></span></td>
+		</tr>
+		<tr>
+		  <td><span class="tableIcon fan"></span></td>
+		</tr>
+		<tr>
+		  <td><span class="tableIcon bai"></span></td>
+		</tr>
+		<tr>
+		  <td><span class="tableIcon yan"></span></td>
+		</tr>
+		<tr>
+		  <td><span class="tableIcon yi"></span><span class="tableIcon fu"></td>
+		</tr>
+		<tr>
+		  <td><span class="tableIcon wei"></span><span class="tableIcon zhu"></td>
+		</tr>
+		<tr>
+		  <td><span class="tableIcon wei"></span><span class="tableIcon fu"></td>
+		</tr>
+	</table>
+</body>
+</html>
