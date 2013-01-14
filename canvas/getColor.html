@@ -84,10 +84,12 @@ function getColorValue(data, width){
 		x=e.layerX;
 		y=e.layerY;
 		var base = y*width*4+x*4;
+		progress.style.left = e.pageX+"px";
+		progress.style.top = e.pageY+"px";
 		progress.innerHTML = "xy("+x+","+y+")<br/>color:rgba("+data[base]+","+data[base+1]+","+data[base+2]+","+data[base+3]+")<br/>color:"+colorHex(data[base],data[base+1],data[base+2]);
 	}
 	preCanvas.onmouseout = function(){
-		progress.innerHTML = "nothing";
+		progress.innerHTML = "";
 	}
 }
 /*转换色值:rgba->#000000*/
