@@ -59,19 +59,13 @@ body {
 
 footer {
   margin-top: 10px;
-  text-align: center;
   font-size: 13px;
   text-align: center;
   color: grey;
 }
 
-footer a {
-  color: grey;
-}
-
-.type-file-box{
+#form1{
 	position:relative;
-	width:260px;
 	display: inline-block;
 }
 .type-file-file{
