@@ -1,0 +1,111 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>getColor</title>
+	<link rel="stylesheet" href="index.css" />
+</head>
+
+<body>
+  <div id="container">
+    <header>
+      <div id="title">getColor</div>
+    </header>
+
+    <div id="viewer">
+      <div id="droparea-text">
+        Drag an image here to get color.
+      </div>
+    </div>
+  </div>
+  <div id="progress"></div>
+  <footer>
+  	<div class="type-file-box">
+	  <form id="form1" name="form1" method="post" action="">
+	    <input type="text" id="fileName" class="type-file-text"></input>
+		<input type="button" class="type-file-button" value="浏览"/>
+		<input type="file" id="uu" size="20" class="type-file-file" onchange="handleFiles(this.files)"></input>
+	  </form>
+	</div>
+  </footer>
+  <a href=""><img style="position: absolute; top: 0; right: 0; border: 0;" src="" alt="Fork me on GitHub"></a>
+
+<script type="text/javascript"> 
+function $(id){
+	return document.getElementById(id);
+}
+
+function cnvs_clearValue(){
+	$('progress').innerHTML = "nothing";
+}
+function cnvs_getValue(e){
+	x=e.layerX;
+	y=e.layerY;
+	var base = y*w*4+x*4;
+	$('progress').innerHTML = "xycoordinates("+x+","+y+")<br/>color:rgba("+data[base]+","+data[base+1]+","+data[base+2]+","+data[base+3]+")<br/>color:"+colorHex(data[base],data[base+1],data[base+2]);
+}
+
+
+
+function displayImage(container,dataURL){
+	var preCanvas = document.createElement("canvas");
+	container.appendChild(preCanvas);	
+	var cxt = preCanvas.getContext("2d");
+	
+	var img = new Image();
+  img.onload = function(){
+		try{
+			cxt.drawImage(img, 0, 0);
+			data = cxt.getImageData(0, 0, w, h).data;
+		}catch(e){
+			alert(e.message)
+		}
+		console.log(data, data.toString());
+	}
+	img.src = dataURL;
+	w = img.width,h = img.height;
+	preCanvas.width = w; preCanvas.height = h;
+	$("viewer").style.width = w+"px";$("viewer").style.height = h+"px";
+	$("droparea-text").style.display = "none";
+	
+	preCanvas.onmousemove = function(e){
+		x=e.layerX;
+	y=e.layerY;
+	var base = y*w*4+x*4;
+	$('progress').innerHTML = "xycoordinates("+x+","+y+")<br/>color:rgba("+data[base]+","+data[base+1]+","+data[base+2]+","+data[base+3]+")<br/>color:"+colorHex(data[base],data[base+1],data[base+2]);
+
+		}
+		
+	/*转换色值:rgba->#000000*/
+function colorHex(a1,a2,a3){
+	var strHex = "#";
+	for (var i = 0; i < 3; i++) {
+		strHex+=(arguments[i]<16?"0":"")+arguments[i].toString(16);
+	};
+	return strHex;
+}
+}
+
+function handleFiles(files){
+	for (var i = 0; i < files.length; i++) {  
+		var file = files[i];  
+		var imageType = /image.*/;  
+		  
+		if (!file.type.match(imageType)) { 
+			$('progress').innerHTML = "不是图片"; 
+		  continue;  
+		}  
+
+		var reader = new FileReader();  
+		reader.onload = function(e){
+			displayImage($('viewer'),e.target.result);
+			alert(e.target.result+","+i);
+		}
+		reader.readAsDataURL(file);  
+		
+	}  
+}
+</script>
+</body>
+</html>
+<!--  -->
