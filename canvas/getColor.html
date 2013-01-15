@@ -48,6 +48,7 @@ function handleFiles(file){
 		}else{
 			var reader = new FileReader();  
 			reader.onload = function(e){
+				//
 				displayImage(e.target.result);//displayImage(container,dataURL)
 			}
 			reader.readAsDataURL(file[0]); 
@@ -59,23 +60,21 @@ function handleFiles(file){
 
 function displayImage(dataURL){	
 	var cxt = preCanvas.getContext("2d");	
-	var img = new Image();
-	img.src = dataURL;
-		
-	var w = img.width, h = img.height;
-	preCanvas.width = w; 
-	preCanvas.height = h;
-	viewer.style.width = w+"px";
-	viewer.style.height = h+"px";
-	$("droparea-text").style.display = "none";
+	var img = new Image();	
 	
 	img.onload = function(){
-		alert("loaded");
+		var w = img.width, h = img.height;
+		preCanvas.width = w; 
+		preCanvas.height = h;
+		viewer.style.width = w+"px";
+		viewer.style.height = h+"px";
+		$("droparea-text").style.display = "none";
+		
 		cxt.drawImage(img, 0, 0);
 		var data = cxt.getImageData(0, 0, w, h).data;
-		//console.log(data);
 		getColorValue(data, w);
 	}
+	img.src = dataURL;
 }
 //获取data并显示
 function getColorValue(data, width){
@@ -84,10 +83,12 @@ function getColorValue(data, width){
 		x=e.layerX;
 		y=e.layerY;
 		var base = y*width*4+x*4;
+		progress.style.left = e.pageX+"px";
+		progress.style.top = e.pageY+"px";
 		progress.innerHTML = "xy("+x+","+y+")<br/>color:rgba("+data[base]+","+data[base+1]+","+data[base+2]+","+data[base+3]+")<br/>color:"+colorHex(data[base],data[base+1],data[base+2]);
 	}
 	preCanvas.onmouseout = function(){
-		progress.innerHTML = "nothing";
+		progress.innerHTML = "";
 	}
 }
 /*转换色值:rgba->#000000*/
@@ -107,4 +108,4 @@ function colorHex(a1,a2,a3){
 </script>
 </body>
 </html>
-<!--  -->
+<!-- 1.拖拽预览图片 2.点击时才获取数据，否则data太大 -->
