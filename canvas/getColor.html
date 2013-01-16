@@ -34,13 +34,25 @@
 function $(id){
 	return document.getElementById(id);
 }
+
 var preCanvas = $("preview");
 var viewer = $("viewer");
-var fileName = $("fileName");
 var progress = $('progress');
-
+  
+viewer.addEventListener("drop",function(e){  
+     e.stopPropagation();   
+     e.preventDefault();    
+  
+     var dt = e.dataTransfer;    
+  
+     //获取文件数组  
+     var files = dt.files;  
+     handleFiles(files);   
+},false);  
+  
 /*FileReader预览图片*/
 function handleFiles(file){ 
+	var fileName = $("fileName");
 	fileName.value = file[0].name;
 	if (file[0].type.indexOf("image") == 0) { 
 		if(file[0].size >= 512000){
@@ -71,26 +83,28 @@ function displayImage(dataURL){
 		$("droparea-text").style.display = "none";
 		
 		cxt.drawImage(img, 0, 0);
-		var data = cxt.getImageData(0, 0, w, h).data;
-		getColorValue(data, w);
+		getColorValue(cxt);
 	}
 	img.src = dataURL;
 }
+
 //获取data并显示
-function getColorValue(data, width){
+function getColorValue(canvas){
 	//console.log(data);
 	preCanvas.onmousemove = function(e){
-		x=e.layerX;
-		y=e.layerY;
-		var base = y*width*4+x*4;
+		var x=e.layerX;
+		var y=e.layerY;
+		var data = canvas.getImageData(x, y, x+1, y+1).data;
+		
 		progress.style.left = e.pageX+"px";
 		progress.style.top = e.pageY+"px";
-		progress.innerHTML = "xy("+x+","+y+")<br/>color:rgba("+data[base]+","+data[base+1]+","+data[base+2]+","+data[base+3]+")<br/>color:"+colorHex(data[base],data[base+1],data[base+2]);
+		progress.innerHTML = "xy("+x+","+y+")<br/>color:rgba("+data[0]+","+data[1]+","+data[2]+","+data[3]+")<br/>color:"+colorHex(data[0],data[1],data[2]);
 	}
 	preCanvas.onmouseout = function(){
 		progress.innerHTML = "";
 	}
 }
+
 /*转换色值:rgba->#000000*/
 function colorHex(a1,a2,a3){
 	var strHex = "#";
